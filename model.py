@@ -282,16 +282,16 @@ class DDIM(GaussianDiffusion):
             pred_x0 = (x - torch.sqrt((1. - alpha_cumprod_t))
                     * pred_noise) / torch.sqrt(alpha_cumprod_t)
 
-            # 4. compute variance: "sigma_t(η)" -> see formula (16)
+            # 4. compute variance: "sigma_t(η)"
             # σ_t = sqrt((1 − α_t−1)/(1 − α_t)) * sqrt(1 − α_t/α_t−1)
             sigmas_t = ddim_eta * torch.sqrt(
                 (1 - alpha_cumprod_t_prev) / (1 - alpha_cumprod_t) * (1 - alpha_cumprod_t / alpha_cumprod_t_prev))
 
-            # 5. compute "direction pointing to x_t" of formula (12)
+            # 5. compute "direction pointing to x_t"
             pred_dir_xt = torch.sqrt(
                 1 - alpha_cumprod_t_prev - sigmas_t**2) * pred_noise
 
-            # 6. compute x_{t-1} of formula (12)
+            # 6. compute x_{t-1}
             x_prev = torch.sqrt(alpha_cumprod_t_prev) * pred_x0 + \
                 pred_dir_xt + sigmas_t * torch.randn_like(x)
 
@@ -336,16 +336,16 @@ class DDIM(GaussianDiffusion):
             pred_x0 = (x - torch.sqrt((1. - alpha_cumprod_t))
                     * pred_noise) / torch.sqrt(alpha_cumprod_t)
 
-            # 4. compute variance: "sigma_t(η)" -> see formula (16)
+            # 4. compute variance: "sigma_t(η)" 
             # σ_t = sqrt((1 − α_t−1)/(1 − α_t)) * sqrt(1 − α_t/α_t−1)
             sigmas_t = ddim_eta * torch.sqrt(
                 (1 - alpha_cumprod_t_prev) / (1 - alpha_cumprod_t) * (1 - alpha_cumprod_t / alpha_cumprod_t_prev))
 
-            # 5. compute "direction pointing to x_t" of formula (12)
+            # 5. compute "direction pointing to x_t" 
             pred_dir_xt = torch.sqrt(
                 1 - alpha_cumprod_t_prev - sigmas_t**2) * pred_noise
 
-            # 6. compute x_{t-1} of formula (12)
+            # 6. compute x_{t-1}
             x_prev = torch.sqrt(alpha_cumprod_t_prev) * pred_x0 + \
                 pred_dir_xt + sigmas_t * torch.randn_like(x)
             
